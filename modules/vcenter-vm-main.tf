@@ -93,13 +93,13 @@ resource "vsphere_virtual_machine" "vm" {
   lifecycle {
     ignore_changes = [ disk ]
   }
-  
+
   disk {
     label = "disk0"
     size  = var.disk_size
     thin_provisioned = var.disk_thin_provisioned
   }
-
+/*
   dynamic "disk" {
     for_each = [for extd in var.external_disks : {
       index = extd.index - 1
@@ -114,7 +114,7 @@ resource "vsphere_virtual_machine" "vm" {
         datastore_id = data.vsphere_datastore.datastore_ext_disk[disk.value.index].id
       }
   }
-
+*/
   clone {
     template_uuid = data.vsphere_virtual_machine.template[0].id
 
