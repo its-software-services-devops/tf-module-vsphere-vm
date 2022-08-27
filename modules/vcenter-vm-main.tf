@@ -107,7 +107,6 @@ resource "vsphere_virtual_machine" "vm" {
 
       content  {
         attach = true
-        keep_on_remove = true
         label = "extdisk-${disk.value.index}"
         unit_number = var.external_disks[disk.value.index].index
         path = var.external_disks[disk.value.index].path
