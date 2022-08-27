@@ -99,7 +99,7 @@ resource "vsphere_virtual_machine" "vm" {
     size  = var.disk_size
     thin_provisioned = var.disk_thin_provisioned
   }
-/*
+
   dynamic "disk" {
     for_each = [for extd in var.external_disks : {
       index = extd.index - 1
@@ -107,6 +107,7 @@ resource "vsphere_virtual_machine" "vm" {
 
       content  {
         attach = true
+        keep_on_remove = true
         label = "extdisk-${disk.value.index}"
         unit_number = var.external_disks[disk.value.index].index
         path = var.external_disks[disk.value.index].path
@@ -114,7 +115,7 @@ resource "vsphere_virtual_machine" "vm" {
         datastore_id = data.vsphere_datastore.datastore_ext_disk[disk.value.index].id
       }
   }
-*/
+
   clone {
     template_uuid = data.vsphere_virtual_machine.template[0].id
 
